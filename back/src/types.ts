@@ -137,6 +137,7 @@ export type MutationUpdateCommentArgs = {
 
 export type MutationUpdatePostArgs = {
   body?: InputMaybe<Scalars['String']['input']>;
+  postId: Scalars['String']['input'];
   title?: InputMaybe<Scalars['String']['input']>;
   token: Scalars['String']['input'];
 };
@@ -147,7 +148,6 @@ export type Post = {
   body: Scalars['String']['output'];
   comments?: Maybe<Array<Maybe<Comment>>>;
   id: Scalars['ID']['output'];
-  slug: Scalars['String']['output'];
   title: Scalars['String']['output'];
 };
 
@@ -186,12 +186,11 @@ export type UpdatePostResponse = {
 
 export type User = {
   __typename?: 'User';
-  email?: Maybe<Scalars['String']['output']>;
+  email: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   name?: Maybe<Scalars['String']['output']>;
   posts?: Maybe<Array<Maybe<Post>>>;
   postsLike?: Maybe<Array<Maybe<UserPostLikes>>>;
-  username: Scalars['String']['output'];
 };
 
 export type UserPostLikes = {
@@ -376,7 +375,7 @@ export type MutationResolvers<ContextType = DataSourceContext, ParentType extend
   deletePost?: Resolver<Maybe<ResolversTypes['DeletePostResponse']>, ParentType, ContextType, RequireFields<MutationDeletePostArgs, 'postId' | 'token'>>;
   signIn?: Resolver<Maybe<ResolversTypes['SignInResponse']>, ParentType, ContextType, RequireFields<MutationSignInArgs, 'email' | 'password'>>;
   updateComment?: Resolver<Maybe<ResolversTypes['UpdateCommentResponse']>, ParentType, ContextType, RequireFields<MutationUpdateCommentArgs, 'comment' | 'commentId' | 'token'>>;
-  updatePost?: Resolver<Maybe<ResolversTypes['UpdatePostResponse']>, ParentType, ContextType, RequireFields<MutationUpdatePostArgs, 'token'>>;
+  updatePost?: Resolver<Maybe<ResolversTypes['UpdatePostResponse']>, ParentType, ContextType, RequireFields<MutationUpdatePostArgs, 'postId' | 'token'>>;
 };
 
 export type PostResolvers<ContextType = DataSourceContext, ParentType extends ResolversParentTypes['Post'] = ResolversParentTypes['Post']> = {
@@ -384,7 +383,6 @@ export type PostResolvers<ContextType = DataSourceContext, ParentType extends Re
   body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   comments?: Resolver<Maybe<Array<Maybe<ResolversTypes['Comment']>>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -417,12 +415,11 @@ export type UpdatePostResponseResolvers<ContextType = DataSourceContext, ParentT
 };
 
 export type UserResolvers<ContextType = DataSourceContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
-  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   posts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Post']>>>, ParentType, ContextType>;
   postsLike?: Resolver<Maybe<Array<Maybe<ResolversTypes['UserPostLikes']>>>, ParentType, ContextType>;
-  username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
