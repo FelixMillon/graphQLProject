@@ -8,7 +8,7 @@
     "compile": "tsc",
     "start": "node --import ./scripts/register.js --watch src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate": "graphql-codegen",
+    "generate": "graphql-codegen  --verbose  --debug",
     "prisma": "prisma"
   },
   "keywords": [],
