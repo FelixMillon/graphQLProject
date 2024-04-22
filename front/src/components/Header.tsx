@@ -1,15 +1,17 @@
+// Header.tsx
 import React from 'react';
+import { Link } from 'react-router-dom'; 
 
 function Header() {
   return (
     <header className="header">
       <div className="title">TP-GraphQL</div>
       <nav className="navigation">
-        <a href="/articles">Article</a>
+        <Link to="/articles">Articles</Link> 
       </nav>
       <div className="actions">
-        <button className="connexion">Connexion</button>
-        <button className="inscription">Inscription</button>
+        <Link to="/login">Connexion</Link> 
+        <button>Inscription</button>
       </div>
     </header>
   );
