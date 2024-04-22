@@ -1,48 +1,54 @@
 import gql from "graphql-tag";
 
 export const typeDefs = gql`
-type Track {
-  id: ID!
-  title: String!
-  author: Author!
-  thumbnail: String
-  numberOfViews: Int
-  numberOfLikes: Int
-}
 
-type Author {
+type User {
   id: ID!
-  name: String!
-  photo: String
-}
-
-type Film {
-  id: ID!
-  title: String
-  people: [People]!
-}
-
-type People {
-  id: ID!
+  username: String!
+  email: String
   name: String
-  eyeColor: String
-  films: [Film]!
+  posts: [Post]
+  postsLike: [UserPostLikes]
 }
+
+type Post {
+  id: ID!
+  slug: String!
+  title: String!
+  body: String!
+  authorId: String!
+  comments: [Comment]
+}
+
+type Comment {
+  id: ID!
+  comment: String!
+  postId: String!
+  authorId: String!
+}
+
+type UserPostLikes {
+  id: ID!
+  postId: String!
+  authorId: String!
+}
+
 
 type Query {
-  divide(number1: Int!, number2: Int!): Float
-  multiply(number1: Int!, number2: Int!): Float
-  closestColor(hexa: String!): String
-  getTracks: [Track!]!
-  getFilms: [Film]!
-  getPeople: [People]!
+  getPosts: [Post!]!
+  getPostsByUser(userId: String!): [Post!]!
 }
 
 type Mutation {
-  incrementTrackViews(id: ID!): IncrementTrackViewsResponse
-  incrementLikes(id: ID!): IncrementLikesResponse
-  createUser(username: String!, password: String!): CreateUserResponse
-  signIn(username: String!, password: String!): SignInResponse
+  createUser(email: String!, name: String!, password: String!): CreateUserResponse
+  signIn(email: String!, password: String!): SignInResponse
+  createLikePost(postId: String!, token: String!): CreateLikeResponse
+  createPost(title: String!, body: String!, token: String!): CreatePostResponse
+  deletePost(postId: String!, token: String!): DeletePostResponse
+  updatePost(title: String, body: String, token: String!): UpdatePostResponse
+  createComment(comment: String!, postId: String!, token: String!): CreateCommentResponse
+  deleteComment(commentId: String!, token: String!): DeleteCommentResponse
+  updateComment(commentId: String!, comment: String!, token: String!): UpdateCommentResponse
 }
 
 type SignInResponse {
@@ -59,22 +65,46 @@ type CreateUserResponse {
   user: User
 }
 
-type User {
-  id: ID!
-  username: String!
-}
-
-type IncrementTrackViewsResponse {
+type CreatePostResponse {
   code: Int!
   success: Boolean!
   message: String!
-  track: Track
 }
 
-type IncrementLikesResponse {
+type CreateLikeResponse {
   code: Int!
   success: Boolean!
   message: String!
-  track: Track
 }
+
+type DeletePostResponse {
+  code: Int!
+  success: Boolean!
+  message: String!
+}
+
+type UpdatePostResponse {
+  code: Int!
+  success: Boolean!
+  message: String!
+}
+
+type CreateCommentResponse {
+  code: Int!
+  success: Boolean!
+  message: String!
+}
+
+type DeleteCommentResponse {
+  code: Int!
+  success: Boolean!
+  message: String!
+}
+
+type UpdateCommentResponse {
+  code: Int!
+  success: Boolean!
+  message: String!
+}
+
 `
