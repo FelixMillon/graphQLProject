@@ -1,42 +1,43 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+body {
+  margin: 0;
+  padding: 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.header {
+  background-color: #0052cc; /* Couleur de fond bleue */
+  color: #fff; /* Couleur du texte blanc */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.navigation {
+  flex-grow: 1; /* Permet à la barre de navigation de prendre autant d'espace disponible */
 }
 
-.card {
-  padding: 2em;
+.navigation a {
+  color: #fff; /* Couleur du texte blanc pour les liens */
+  text-decoration: none;
+  margin-right: 20px; /* Espacement entre les liens */
+  font-weight: bold;
 }
 
-.read-the-docs {
-  color: #888;
+.actions button {
+  background-color: #0052cc; /* Couleur de fond bleue pour les boutons */
+  color: #fff; /* Couleur du texte blanc */
+  border: none;
+  padding: 8px 16px;
+  margin-left: 10px; /* Espacement entre les boutons */
+  cursor: pointer;
+}
+
+.actions button:hover {
+  background-color: #0576e5; /* Légère variation de couleur au survol */
 }
