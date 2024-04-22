@@ -33,7 +33,6 @@ type UserPostLikes {
   authorId: String!
 }
 
-
 type Query {
   getPosts: [Post!]!
   getPostsByUser(userId: String!): [Post!]!
