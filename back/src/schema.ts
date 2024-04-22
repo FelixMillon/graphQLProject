@@ -7,8 +7,8 @@ type User {
   username: String!
   email: String
   name: String
-  posts: Post[]
-  postsLike: UserPostLikes[]
+  posts: [Post]
+  postsLike: [UserPostLikes]
 }
 
 type Post {
@@ -35,16 +35,16 @@ type UserPostLikes {
 
 
 type Query {
-  getArticles: [Article!]!
-  getArticlesByUser(userId: String!): [Article!]!
+  getPosts: [Post!]!
+  getPostsByUser(userId: String!): [Post!]!
 }
 
 type Mutation {
   createUser(email: String!, name: String!, password: String!): CreateUserResponse
   signIn(email: String!, password: String!): SignInResponse
-  addLikePost(postId: String!, token: String!): AddLikeResponse
+  createLikePost(postId: String!, token: String!): CreateLikeResponse
   createPost(title: String!, body: String!, token: String!): CreatePostResponse
-  deletePost(postId: String!, token: String!): DeletePost
+  deletePost(postId: String!, token: String!): DeletePostResponse
   updatePost(title: String, body: String, token: String!): UpdatePostResponse
   createComment(comment: String!, postId: String!, token: String!): CreateCommentResponse
   deleteComment(commentId: String!, token: String!): DeleteCommentResponse
@@ -71,25 +71,25 @@ type CreatePostResponse {
   message: String!
 }
 
-type AddLikeResponse {
+type CreateLikeResponse {
   code: Int!
   success: Boolean!
   message: String!
 }
 
-type DeletePost {
+type DeletePostResponse {
   code: Int!
   success: Boolean!
   message: String!
 }
 
-type UpdatePost {
+type UpdatePostResponse {
   code: Int!
   success: Boolean!
   message: String!
 }
 
-type AddCommentResponse {
+type CreateCommentResponse {
   code: Int!
   success: Boolean!
   message: String!
