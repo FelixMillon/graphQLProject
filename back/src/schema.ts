@@ -12,7 +12,6 @@ type User {
 
 type Post {
   id: ID!
-  slug: String!
   title: String!
   body: String!
   authorId: String!

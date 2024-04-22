@@ -147,7 +147,6 @@ export type Post = {
   body: Scalars['String']['output'];
   comments?: Maybe<Array<Maybe<Comment>>>;
   id: Scalars['ID']['output'];
-  slug: Scalars['String']['output'];
   title: Scalars['String']['output'];
 };
 
@@ -383,7 +382,6 @@ export type PostResolvers<ContextType = DataSourceContext, ParentType extends Re
   body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   comments?: Resolver<Maybe<Array<Maybe<ResolversTypes['Comment']>>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  slug?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };

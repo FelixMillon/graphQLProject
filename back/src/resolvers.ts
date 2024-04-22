@@ -3,8 +3,8 @@ import { getClosestColor } from "./colors.js";
 import { Resolvers } from "./types.js";
 import { createUser } from "./mutations/createUser.js";
 import { signIn } from "./mutations/signIn.js";
-// import { getPosts } from "./query/getPosts.js";
-// import { getPostsByUser } from "./query/getPostsByUser.js";
+import { getPosts } from "./query/getPosts.js";
+import { getPostsByUser } from "./query/getPosts.js";
 // import { createLikePost } from "./mutations/createLikePost.js";
 // import { createPost } from "./mutations/createPost.js";
 // import { deletePost } from "./mutations/deletePost.js";
@@ -15,8 +15,8 @@ import { signIn } from "./mutations/signIn.js";
 
 export const resolvers: Resolvers = {
   Query: {
-    // getPosts,
-    // getPostsByUser
+    getPosts,
+    getPostsByUser
   },
   Mutation: {
     createUser: createUser,
