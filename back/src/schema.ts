@@ -4,8 +4,7 @@ export const typeDefs = gql`
 
 type User {
   id: ID!
-  username: String!
-  email: String
+  email: String!
   name: String
   posts: [Post]
   postsLike: [UserPostLikes]
