@@ -42,7 +42,7 @@ type Mutation {
   createLikePost(postId: String!, token: String!): CreateLikeResponse
   createPost(title: String!, body: String!, token: String!): CreatePostResponse
   deletePost(postId: String!, token: String!): DeletePostResponse
-  updatePost(title: String, body: String, token: String!): UpdatePostResponse
+  updatePost(postId: String!, title: String, body: String, token: String!): UpdatePostResponse
   createComment(comment: String!, postId: String!, token: String!): CreateCommentResponse
   deleteComment(commentId: String!, token: String!): DeleteCommentResponse
   updateComment(commentId: String!, comment: String!, token: String!): UpdateCommentResponse
