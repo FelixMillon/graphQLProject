@@ -7,7 +7,7 @@ import { signIn } from "./mutations/signIn.js";
 // import { getPostsByUser } from "./query/getPostsByUser.js";
 // import { createLikePost } from "./mutations/createLikePost.js";
 import { createPost } from "./mutations/createPost.js";
-// import { deletePost } from "./mutations/deletePost.js";
+import { deletePost } from "./mutations/deletePost.js";
 import { updatePost } from "./mutations/updatePost.js";
 // import { createComment } from "./mutations/createComment.js";
 // import { deleteComment } from "./mutations/deleteComment.js";
@@ -23,7 +23,7 @@ export const resolvers: Resolvers = {
     signIn: signIn,
     // createLikePost: createLikePost,
     createPost: createPost,
-    // deletePost: deletePost,
+    deletePost: deletePost,
     updatePost: updatePost,
     // createComment: createComment,
     // deleteComment: deleteComment,
