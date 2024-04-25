@@ -1,5 +1,3 @@
-import { GraphQLError } from "graphql";
-import { getClosestColor } from "./colors.js";
 import { Resolvers } from "./types.js";
 import { createUser } from "./mutations/createUser.js";
 import { signIn } from "./mutations/signIn.js";
