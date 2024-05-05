@@ -163,12 +163,19 @@ export type Post = {
   comments?: Maybe<Array<Maybe<Comment>>>;
   id: Scalars['ID']['output'];
   title: Scalars['String']['output'];
+  usersLikes?: Maybe<Array<Maybe<UserPostLikes>>>;
 };
 
 export type Query = {
   __typename?: 'Query';
+  getLikesByPost?: Maybe<Array<UserPostLikes>>;
   getPosts: Array<Post>;
   getPostsByUser: Array<Post>;
+};
+
+
+export type QueryGetLikesByPostArgs = {
+  postId: Scalars['String']['input'];
 };
 
 
@@ -204,14 +211,14 @@ export type User = {
   id: Scalars['ID']['output'];
   name?: Maybe<Scalars['String']['output']>;
   posts?: Maybe<Array<Maybe<Post>>>;
-  postsLike?: Maybe<Array<Maybe<UserPostLikes>>>;
+  postsLikes?: Maybe<Array<Maybe<UserPostLikes>>>;
 };
 
 export type UserPostLikes = {
   __typename?: 'UserPostLikes';
-  authorId: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   postId: Scalars['String']['output'];
+  userId: Scalars['String']['output'];
 };
 
 
@@ -408,10 +415,12 @@ export type PostResolvers<ContextType = DataSourceContext, ParentType extends Re
   comments?: Resolver<Maybe<Array<Maybe<ResolversTypes['Comment']>>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  usersLikes?: Resolver<Maybe<Array<Maybe<ResolversTypes['UserPostLikes']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = DataSourceContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  getLikesByPost?: Resolver<Maybe<Array<ResolversTypes['UserPostLikes']>>, ParentType, ContextType, RequireFields<QueryGetLikesByPostArgs, 'postId'>>;
   getPosts?: Resolver<Array<ResolversTypes['Post']>, ParentType, ContextType>;
   getPostsByUser?: Resolver<Array<ResolversTypes['Post']>, ParentType, ContextType, RequireFields<QueryGetPostsByUserArgs, 'userId'>>;
 };
@@ -443,14 +452,14 @@ export type UserResolvers<ContextType = DataSourceContext, ParentType extends Re
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   posts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Post']>>>, ParentType, ContextType>;
-  postsLike?: Resolver<Maybe<Array<Maybe<ResolversTypes['UserPostLikes']>>>, ParentType, ContextType>;
+  postsLikes?: Resolver<Maybe<Array<Maybe<ResolversTypes['UserPostLikes']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UserPostLikesResolvers<ContextType = DataSourceContext, ParentType extends ResolversParentTypes['UserPostLikes'] = ResolversParentTypes['UserPostLikes']> = {
-  authorId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   postId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  userId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

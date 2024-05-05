@@ -7,7 +7,7 @@ type User {
   email: String!
   name: String
   posts: [Post]
-  postsLike: [UserPostLikes]
+  postsLikes: [UserPostLikes]
 }
 
 type Post {
@@ -16,6 +16,7 @@ type Post {
   body: String!
   authorId: String!
   comments: [Comment]
+  usersLikes: [UserPostLikes]
 }
 
 type Comment {
@@ -28,12 +29,13 @@ type Comment {
 type UserPostLikes {
   id: ID!
   postId: String!
-  authorId: String!
+  userId: String!
 }
 
 type Query {
   getPosts: [Post!]!
   getPostsByUser(userId: String!): [Post!]!
+  getLikesByPost(postId: String!): [UserPostLikes!]
 }
 
 type Mutation {

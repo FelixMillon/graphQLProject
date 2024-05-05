@@ -1,12 +1,11 @@
-import { GraphQLError } from "graphql";
-import { getClosestColor } from "./colors.js";
 import { Resolvers } from "./types.js";
 import { createUser } from "./mutations/createUser.js";
 import { signIn } from "./mutations/signIn.js";
 import { createLikePost } from "./mutations/createLikePost.js";
 import { deleteLikePost } from "./mutations/deleteLikePost.js";
 import { getPosts } from "./query/getPosts.js";
-import { getPostsByUser } from "./query/getPosts.js";
+import { getPostsByUser } from "./query/getPostsByUser.js";
+import { getLikesByPost } from "./query/getLikesByPost.js";
 import { createPost } from "./mutations/createPost.js";
 import { deletePost } from "./mutations/deletePost.js";
 import { updatePost } from "./mutations/updatePost.js";
@@ -17,7 +16,8 @@ import { updateComment } from "./mutations/updateComment.js";
 export const resolvers: Resolvers = {
   Query: {
     getPosts,
-    getPostsByUser
+    getPostsByUser,
+    getLikesByPost
   },
   Mutation: {
     createUser: createUser,
@@ -30,6 +30,22 @@ export const resolvers: Resolvers = {
     createComment: createComment,
     deleteComment: deleteComment,
     updateComment: updateComment
+  },
+  Post:{
+    comments:({id}, _, {dataSources}) => {
+      return dataSources.db.comment.findMany({
+        where:{
+          postId: id
+        }
+      })
+    },
+    usersLikes:({id}, _, {dataSources}) => {
+      return dataSources.db.userPostLikes.findMany({
+        where:{
+          postId: id
+        }
+      })
+    }
   }
 }
 
