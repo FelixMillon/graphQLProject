@@ -169,12 +169,18 @@ export type Post = {
 export type Query = {
   __typename?: 'Query';
   getLikesByPost?: Maybe<Array<UserPostLikes>>;
+  getPostById: Post;
   getPosts: Array<Post>;
   getPostsByUser: Array<Post>;
 };
 
 
 export type QueryGetLikesByPostArgs = {
+  postId: Scalars['String']['input'];
+};
+
+
+export type QueryGetPostByIdArgs = {
   postId: Scalars['String']['input'];
 };
 
@@ -421,6 +427,7 @@ export type PostResolvers<ContextType = DataSourceContext, ParentType extends Re
 
 export type QueryResolvers<ContextType = DataSourceContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   getLikesByPost?: Resolver<Maybe<Array<ResolversTypes['UserPostLikes']>>, ParentType, ContextType, RequireFields<QueryGetLikesByPostArgs, 'postId'>>;
+  getPostById?: Resolver<ResolversTypes['Post'], ParentType, ContextType, RequireFields<QueryGetPostByIdArgs, 'postId'>>;
   getPosts?: Resolver<Array<ResolversTypes['Post']>, ParentType, ContextType>;
   getPostsByUser?: Resolver<Array<ResolversTypes['Post']>, ParentType, ContextType, RequireFields<QueryGetPostsByUserArgs, 'userId'>>;
 };
