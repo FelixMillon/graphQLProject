@@ -34,6 +34,7 @@ model Comment {
   postId   String
   author   User   @relation(fields: [authorId], references: [id])
   authorId String
+  @@unique([authorId, postId])
 }
 
 model UserPostLikes {
@@ -42,4 +43,5 @@ model UserPostLikes {
   userId String
   post   Post   @relation(fields: [postId], references: [id])
   postId String
+  @@unique([userId, postId])
 }

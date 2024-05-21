@@ -7,7 +7,7 @@ type User {
   email: String!
   name: String
   posts: [Post]
-  postsLike: [UserPostLikes]
+  postsLikes: [UserPostLikes]
 }
 
 type Post {
@@ -16,6 +16,7 @@ type Post {
   body: String!
   authorId: String!
   comments: [Comment]
+  usersLikes: [UserPostLikes]
 }
 
 type Comment {
@@ -28,18 +29,21 @@ type Comment {
 type UserPostLikes {
   id: ID!
   postId: String!
-  authorId: String!
+  userId: String!
 }
 
 type Query {
   getPosts: [Post!]!
+  getPostById(postId: String!): Post!
   getPostsByUser(userId: String!): [Post!]!
+  getLikesByPost(postId: String!): [UserPostLikes!]
 }
 
 type Mutation {
   createUser(email: String!, name: String!, password: String!): CreateUserResponse
   signIn(email: String!, password: String!): SignInResponse
   createLikePost(postId: String!, token: String!): CreateLikeResponse
+  deleteLikePost(postId: String!, token: String!): DeleteLikeResponse
   createPost(title: String!, body: String!, token: String!): CreatePostResponse
   deletePost(postId: String!, token: String!): DeletePostResponse
   updatePost(postId: String!, title: String, body: String, token: String!): UpdatePostResponse
@@ -53,6 +57,7 @@ type SignInResponse {
   success: Boolean!
   message: String!
   token: String
+  id: String
 }
 
 type CreateUserResponse {
@@ -69,6 +74,12 @@ type CreatePostResponse {
 }
 
 type CreateLikeResponse {
+  code: Int!
+  success: Boolean!
+  message: String!
+}
+
+type DeleteLikeResponse {
   code: Int!
   success: Boolean!
   message: String!
