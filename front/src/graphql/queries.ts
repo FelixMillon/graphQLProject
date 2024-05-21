@@ -6,9 +6,15 @@ export const GET_POSTS_QUERY = gql`
       id
       title
       body
+      authorId
       comments {
         id
         comment
+        authorId
+      }
+      usersLikes {
+        id
+        userId
       }
     }
   }
@@ -16,15 +22,21 @@ export const GET_POSTS_QUERY = gql`
 
 export const GET_POST_QUERY = gql`
   query GetPost($id: ID!) {
-    getPost(id: $id) {
+    getPosts {
       id
       title
       body
+      authorId
       comments {
         id
         comment
         authorId
       }
+      usersLikes {
+        id
+        userId
+      }
     }
   }
 `;
+

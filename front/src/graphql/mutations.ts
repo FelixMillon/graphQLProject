@@ -56,25 +56,9 @@ export const DELETE_POST_MUTATION = gql`
   }
 `;
 
-export const CREATE_COMMENT_MUTATION = gql`
-  mutation CreateComment($comment: String!, $postId: String!, $token: String!) {
-    createComment(comment: $comment, postId: $postId, token: $token) {
-      code
-      success
-      message
-      comment {
-        id
-        comment
-        postId
-        authorId
-      }
-    }
-  }
-`;
-
-export const DELETE_COMMENT_MUTATION = gql`
-  mutation DeleteComment($commentId: ID!, $token: String!) {
-    deleteComment(commentId: $commentId, token: $token) {
+export const CREATE_LIKE_POST = gql`
+  mutation CreateLikePost($postId: String!, $token: String!) {
+    createLikePost(postId: $postId, token: $token) {
       code
       success
       message
@@ -82,9 +66,10 @@ export const DELETE_COMMENT_MUTATION = gql`
   }
 `;
 
-export const UPDATE_COMMENT_MUTATION = gql`
-  mutation UpdateComment($commentId: ID!, $comment: String!, $token: String!) {
-    updateComment(commentId: $commentId, comment: $comment, token: $token) {
+
+export const DELETE_LIKE_POST = gql`
+  mutation DeleteLikePost($postId: String!, $token: String!) {
+    deleteLikePost(postId: $postId, token: $token) {
       code
       success
       message
