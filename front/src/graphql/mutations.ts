@@ -55,3 +55,24 @@ export const DELETE_POST_MUTATION = gql`
     }
   }
 `;
+
+export const CREATE_LIKE_POST = gql`
+  mutation CreateLikePost($postId: String!, $token: String!) {
+    createLikePost(postId: $postId, token: $token) {
+      code
+      success
+      message
+    }
+  }
+`;
+
+
+export const DELETE_LIKE_POST = gql`
+  mutation DeleteLikePost($postId: String!, $token: String!) {
+    deleteLikePost(postId: $postId, token: $token) {
+      code
+      success
+      message
+    }
+  }
+`;

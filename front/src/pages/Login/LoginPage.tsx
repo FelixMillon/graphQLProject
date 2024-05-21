@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_MUTATION } from '../../graphql/mutations';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../components/AuthContext';
+import { setCookie } from '../../storage/cookies'
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -13,6 +14,8 @@ const LoginPage = () => {
   const [loginMutation] = useMutation(LOGIN_MUTATION, {
     onCompleted: (data) => {
       login(data.signIn.token); // Stocker le token JWT après connexion
+      setCookie("gqltoken",data.signIn.token, 7)
+      setCookie("gqlid",data.signIn.id, 7)
       navigate('/articles');
     },
     onError: (error) => {
