@@ -72,7 +72,7 @@ const ArticleListPage = () => {
         <div key={post.id}>
           <h2>{post.title}</h2>
           <p>{post.body}</p>
-          {post.usersLikes.some(like => like.userId !== userId) ? (
+          {post.usersLikes.some(like => like.userId === userId) ? (
               <button onClick={() => handleDislike(post.id)}>Dislike Post</button>
             ) : (
               <button onClick={() => handleLike(post.id)}>Like Post</button>

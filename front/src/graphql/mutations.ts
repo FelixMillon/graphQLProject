@@ -6,6 +6,7 @@ export const LOGIN_MUTATION = gql`
       code
       success
       message
+      id
       token
     }
   }
@@ -37,18 +38,18 @@ export const CREATE_POST_MUTATION = gql`
 `;
 
 export const UPDATE_POST_MUTATION = gql`
-  mutation UpdatePost($id: ID!, $title: String, $body: String) {
-    updatePost(postId: $id, title: $title, body: $body) {
+  mutation UpdatePost($postId: String!, $token: String!, $title: String, $body: String) {
+    updatePost(postId: $postId, token: $token, title: $title, body: $body) {
       code
-      success
       message
+      success
     }
   }
 `;
 
 export const DELETE_POST_MUTATION = gql`
-  mutation DeletePost($id: ID!) {
-    deletePost(postId: $id) {
+  mutation DeletePost($postId: String!, $token: String!) {
+    deletePost(postId: $postId, token: $token) {
       code
       success
       message
