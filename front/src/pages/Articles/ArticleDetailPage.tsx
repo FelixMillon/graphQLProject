@@ -3,7 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_POST_QUERY, GET_POSTS_QUERY } from '../../graphql/queries';
 import { UPDATE_POST_MUTATION, DELETE_POST_MUTATION } from '../../graphql/mutations';
-import {getCookie} from '../../storage/cookies'
+import { getCookie } from '../../storage/cookies';
+import './ArticleDetailPage.css';
 
 const ArticleDetailPage = () => {
   const { postId } = useParams<{ postId: string }>();
@@ -26,11 +27,11 @@ const ArticleDetailPage = () => {
     navigate('/articles');
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (loading) return <p className="loading">Loading...</p>;
+  if (error) return <p className="error">Error: {error.message}</p>;
 
   return (
-    <div>
+    <div className="container">
       <h1>{data.getPostById.title}</h1>
       <p>{data.getPostById.body}</p>
       {data.getPostById.authorId == userId && (
@@ -40,14 +41,16 @@ const ArticleDetailPage = () => {
             placeholder="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            className="input-field"
           />
           <textarea
             placeholder="Body"
             value={body}
             onChange={(e) => setBody(e.target.value)}
+            className="input-field"
           />
-          <button type="submit">Update Post</button>
-          <button onClick={handleDelete}>Delete Post</button>
+          <button type="submit" className="update-btn">Update Post</button>
+          <button onClick={handleDelete} className="delete-btn">Delete Post</button>
         </form>
       )}
     </div>
