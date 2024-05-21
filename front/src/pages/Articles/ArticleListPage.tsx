@@ -7,6 +7,7 @@ import { CREATE_LIKE_POST } from '../../graphql/mutations';
 import { Link } from 'react-router-dom';
 import { Comment, Post } from '../../types/types'
 import {getCookie} from '../../storage/cookies'
+import './ArticleListPage.css';
 
 const ArticleListPage = () => {
   const { loading, error, data, refetch } = useQuery(GET_POSTS_QUERY);
@@ -43,12 +44,12 @@ const ArticleListPage = () => {
       await deleteLikePost({ variables: { postId, token } });
       await refetch();
     } catch (error) {
-      console.error('Error liking post:', error);
+      console.error('Error disliking post:', error);
     }
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (loading) return <p className="loading">Loading...</p>;
+  if (error) return <p className="error">Error: {error.message}</p>;
 
   return (
 <div>
