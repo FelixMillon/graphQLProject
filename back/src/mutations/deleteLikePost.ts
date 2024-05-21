@@ -1,7 +1,7 @@
 import { getUser } from "../modules/auth.js";
 import { MutationResolvers } from "../types.js";
 
-export const createLikePost: MutationResolvers['createLikePost'] = async (_, {postId, token}, {dataSources}) => {
+export const deleteLikePost: MutationResolvers['deleteLikePost'] = async (_, {postId, token}, {dataSources}) => {
   try {
     const userdata = getUser(token)
 
@@ -14,30 +14,30 @@ export const createLikePost: MutationResolvers['createLikePost'] = async (_, {po
     }
     // AMELIORATION POSSIBLE
     // alreadyLiked peux être évité en faisant un identifiant hérité des tables posts et user.
-    const alreadyLiked = await dataSources.db.userPostLikes.findFirst({
+    const actualLike = await dataSources.db.userPostLikes.findFirst({
         where:{
             userId: userdata.id,
             postId: postId
         }
     });
-    if(!alreadyLiked){
-        await dataSources.db.userPostLikes.create({
-            data: {
-                postId: postId,
-                userId: userdata.id
-            }
-        });
+    if(!actualLike){
         return {
-            code: 201,
-            message: 'Like has been created',
+            code: 400,
+            message: 'No like found',
             success: true
         }
     }
+    await dataSources.db.userPostLikes.delete({
+        where: {
+            id: actualLike.id
+        }
+    });
     return {
-        code: 400,
-        message: 'Post already liked',
+        code: 201,
+        message: 'Like has been deleted',
         success: true
     }
+
   } catch(e) {
     return {
       code: 400,

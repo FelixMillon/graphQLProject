@@ -4,20 +4,19 @@ export const typeDefs = gql`
 
 type User {
   id: ID!
-  username: String!
-  email: String
+  email: String!
   name: String
   posts: [Post]
-  postsLike: [UserPostLikes]
+  postsLikes: [UserPostLikes]
 }
 
 type Post {
   id: ID!
-  slug: String!
   title: String!
   body: String!
   authorId: String!
   comments: [Comment]
+  usersLikes: [UserPostLikes]
 }
 
 type Comment {
@@ -30,21 +29,23 @@ type Comment {
 type UserPostLikes {
   id: ID!
   postId: String!
-  authorId: String!
+  userId: String!
 }
 
 type Query {
   getPosts: [Post!]!
   getPostsByUser(userId: String!): [Post!]!
+  getLikesByPost(postId: String!): [UserPostLikes!]
 }
 
 type Mutation {
   createUser(email: String!, name: String!, password: String!): CreateUserResponse
   signIn(email: String!, password: String!): SignInResponse
   createLikePost(postId: String!, token: String!): CreateLikeResponse
+  deleteLikePost(postId: String!, token: String!): DeleteLikeResponse
   createPost(title: String!, body: String!, token: String!): CreatePostResponse
   deletePost(postId: String!, token: String!): DeletePostResponse
-  updatePost(title: String, body: String, token: String!): UpdatePostResponse
+  updatePost(postId: String!, title: String, body: String, token: String!): UpdatePostResponse
   createComment(comment: String!, postId: String!, token: String!): CreateCommentResponse
   deleteComment(commentId: String!, token: String!): DeleteCommentResponse
   updateComment(commentId: String!, comment: String!, token: String!): UpdateCommentResponse
@@ -71,6 +72,12 @@ type CreatePostResponse {
 }
 
 type CreateLikeResponse {
+  code: Int!
+  success: Boolean!
+  message: String!
+}
+
+type DeleteLikeResponse {
   code: Int!
   success: Boolean!
   message: String!

@@ -1,9 +1,9 @@
 import { comparePassword, createJWT } from "../modules/auth.js";
 import { MutationResolvers } from "../types.js";
 
-export const signIn: MutationResolvers['signIn'] = async (_, {username, password}, {dataSources}) => {
+export const signIn: MutationResolvers['signIn'] = async (_, {email, password}, {dataSources}) => {
   try {
-    const inBaseUser = await dataSources.db.user.findUnique({where: {username}});
+    const inBaseUser = await dataSources.db.user.findUnique({where: {email}});
     if(!inBaseUser?.id){
       return(
         {
@@ -22,7 +22,8 @@ export const signIn: MutationResolvers['signIn'] = async (_, {username, password
         success: true,
         token: createJWT({
           id: inBaseUser.id,
-          username: inBaseUser.username
+          email: inBaseUser.email,
+          name: inBaseUser.name
         })
       }
     }
