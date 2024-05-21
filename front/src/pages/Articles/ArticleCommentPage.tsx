@@ -33,8 +33,8 @@ const ArticleDetailPage = () => {
   };
 
   const handleDelete = (e: React.FormEvent, commentId: string) => {
-    console.log(commentId)
-    deleteComment({ variables: { commentId, token } });
+    e.preventDefault();
+    deleteComment({ variables: { commentId, token }, refetchQueries: [{ query: GET_POST_QUERY, variables: { postId } }] });
   };
 
   if (loading) return <p>Loading...</p>;
