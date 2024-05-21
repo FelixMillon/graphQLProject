@@ -27,6 +27,37 @@ export const SIGNUP_MUTATION = gql`
   }
 `;
 
+export const CREATE_COMMENT_MUTATION = gql`
+  mutation CreateComment($comment: String!, $postId: String!, $token: String!) {
+    createComment(comment: $comment, postId: $postId, token: $token) {
+      code
+      message
+      success
+    }
+  }
+`;
+
+export const UPDATE_COMMENT_MUTATION = gql`
+  mutation UpdateComment($commentId: String!, $comment: String!, $token: String!) {
+    updateComment(commentId: $commentId, comment: $comment, token: $token) {
+      code
+      message
+      success
+    }
+  }
+  
+`;
+
+export const DELETE_COMMENT_MUTATION = gql`
+  mutation DeleteComment($commentId: String!, $token: String!) {
+    deleteComment(commentId: $commentId, token: $token) {
+      code
+      message
+      success
+    }
+  }
+`;
+
 export const CREATE_POST_MUTATION = gql`
   mutation CreatePost($title: String!, $body: String!, $token: String!) {
     createPost(title: $title, body: $body, token: $token) {

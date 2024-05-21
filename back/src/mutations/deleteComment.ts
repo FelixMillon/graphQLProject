@@ -13,8 +13,7 @@ export const deleteComment: MutationResolvers['deleteComment'] = async (_, {comm
     }
     await dataSources.db.comment.delete({
         where:{
-            id: commentId,
-            authorId: userdata.id
+            id: commentId
         }
     });
     return {
