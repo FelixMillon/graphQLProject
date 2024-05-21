@@ -1,16 +1,11 @@
-// components/ArticleDetailPage.jsx
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_POST_QUERY } from '../../graphql/queries';
 import { CREATE_COMMENT_MUTATION, DELETE_COMMENT_MUTATION, UPDATE_COMMENT_MUTATION } from '../../graphql/mutations';
 import { useAuth } from '../../components/AuthContext';
-
-type CommentType = {
-  id: string;
-  comment: string;
-  authorId: string;
-};
+import { getCookie } from '../../storage/cookies';
+import { Comment as CommentType } from '../../types/types';
 
 const ArticleDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,10 +17,10 @@ const ArticleDetailPage: React.FC = () => {
   const [newComment, setNewComment] = useState('');
   const [editCommentId, setEditCommentId] = useState<string | null>(null);
   const [editComment, setEditComment] = useState('');
+  const token = getCookie('gqltoken');
 
   const handleCreateComment = async (e: React.FormEvent) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
     if (!token) {
       console.error('No token found, please login first');
       return;
@@ -43,7 +38,6 @@ const ArticleDetailPage: React.FC = () => {
   };
 
   const handleDeleteComment = async (commentId: string) => {
-    const token = localStorage.getItem('token');
     if (!token) {
       console.error('No token found, please login first');
       return;
@@ -66,7 +60,6 @@ const ArticleDetailPage: React.FC = () => {
 
   const handleUpdateComment = async (e: React.FormEvent) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
     if (!token) {
       console.error('No token found, please login first');
       return;
