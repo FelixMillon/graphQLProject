@@ -24,11 +24,10 @@ const SignupPage = () => {
     e.preventDefault();
     signup({ variables: { email, name, password } });
   };
-
   return (
-    <div>
+    <div className='div-signup'>
       <h1>Signup</h1>
-      <form onSubmit={handleSubmit}>
+      <form className='form-flex' onSubmit={handleSubmit}>
         <input
           type="email"
           placeholder="Email"
