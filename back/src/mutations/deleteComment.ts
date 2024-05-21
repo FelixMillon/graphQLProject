@@ -4,6 +4,7 @@ import { MutationResolvers } from "../types.js";
 export const deleteComment: MutationResolvers['deleteComment'] = async (_, {commentId, token}, {dataSources}) => {
   try {
     const userdata = getUser(token)
+    console.log(userdata)
     if(!userdata){
         return {
             code: 400,
@@ -13,7 +14,8 @@ export const deleteComment: MutationResolvers['deleteComment'] = async (_, {comm
     }
     await dataSources.db.comment.delete({
         where:{
-            id: commentId
+            id: commentId,
+            authorId: userdata.id
         }
     });
     return {
