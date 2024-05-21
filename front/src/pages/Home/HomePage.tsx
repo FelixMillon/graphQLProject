@@ -2,7 +2,7 @@ import React from 'react';
 
 const HomePage = () => {
   return (
-    <div>
+    <div className='container'>
       <h1>Bienvenue dans notre application !</h1>
       <p>Cette application permet aux utilisateurs de :</p>
       <ul>

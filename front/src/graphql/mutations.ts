@@ -76,3 +76,14 @@ export const DELETE_LIKE_POST = gql`
     }
   }
 `;
+
+export const CREATE_COMMENT_MUTATION = gql`
+  mutation CreateComment($postId: String!, $comment: String!) {
+    createComment(postId: $postId, comment: $comment) {
+      id
+      comment
+      postId
+      authorId
+    }
+  }
+`;

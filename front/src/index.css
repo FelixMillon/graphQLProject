@@ -22,6 +22,10 @@ a:hover {
   color: #535bf2;
 }
 
+.container {
+  margin: 20px;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -45,6 +49,46 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+nav {
+  background-color: #333;
+  padding: 0.5em;
+  width: 100%;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+nav ul li {
+  margin: 0 1em;
+}
+
+nav ul li a,
+nav ul li button {
+  color: white;
+  text-decoration: none;
+  padding: 0.5em 1em;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center; /* Centrer verticalement le texte */
+  border-radius: 5px; /* Ajouter des bordures arrondies */
+}
+
+nav ul li a:hover,
+nav ul li button:hover {
+  background-color: #555;
+}
+
+nav ul li button {
+  color: white;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -55,6 +99,6 @@ button:focus-visible {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #333;
   }
 }

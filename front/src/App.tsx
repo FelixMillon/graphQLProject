@@ -32,6 +32,7 @@ const App = () => {
             </PrivateRoute>
           } />
         </Routes>
+        <Footer/>
       </Router>
     </AuthProvider>
   );
