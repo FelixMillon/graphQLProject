@@ -1,4 +1,4 @@
-/* ArticleListPage.css */
+/* ArticleCommentPage.css */
 
 .container {
   max-width: 800px;
@@ -8,7 +8,7 @@
 
 .loading,
 .error,
-.no-articles {
+.no-comments {
   font-size: 18px;
   color: #ff0000;
 }
@@ -17,7 +17,6 @@ form {
   margin-bottom: 20px;
 }
 
-input[type="text"],
 textarea {
   width: 100%;
   padding: 10px;
@@ -36,47 +35,39 @@ button:hover {
   background-color: #0056b3;
 }
 
-.post {
+.comment {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 15px;
   margin-bottom: 20px;
 }
 
-.post h2 {
-  font-size: 20px;
+.comment h2 {
+  font-size: 16px;
   margin-bottom: 10px;
 }
 
-.post p {
+.comment p {
   margin-bottom: 10px;
 }
 
-.like-btn,
-.comments-link {
-  padding: 5px 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-right: 10px;
+.comment-actions {
+  display: flex;
+  align-items: center;
 }
 
-.like-btn:hover,
-.comments-link:hover {
-  background-color: #0056b3;
+.update-form {
+  margin-bottom: 10px;
 }
 
-.likes {
-  color: #888;
+.update-form textarea {
+  width: 70%;
 }
 
-.link {
-  color: #007bff;
-  text-decoration: none;
+.delete-btn {
+  background-color: #dc3545;
 }
 
-.link:hover {
-  text-decoration: underline;
+.delete-btn:hover {
+  background-color: #c82333;
 }

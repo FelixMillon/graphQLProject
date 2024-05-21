@@ -35,9 +35,9 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
+    <div className='div-signup'>
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+      <form className='form-flex' onSubmit={handleSubmit}>
         <input
           type="email"
           placeholder="Email"
