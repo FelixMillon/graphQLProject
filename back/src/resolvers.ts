@@ -4,6 +4,7 @@ import { signIn } from "./mutations/signIn.js";
 import { createLikePost } from "./mutations/createLikePost.js";
 import { deleteLikePost } from "./mutations/deleteLikePost.js";
 import { getPosts } from "./query/getPosts.js";
+import { getPostById } from "./query/getPostById.js";
 import { getPostsByUser } from "./query/getPostsByUser.js";
 import { getLikesByPost } from "./query/getLikesByPost.js";
 import { createPost } from "./mutations/createPost.js";
@@ -16,6 +17,7 @@ import { updateComment } from "./mutations/updateComment.js";
 export const resolvers: Resolvers = {
   Query: {
     getPosts,
+    getPostById,
     getPostsByUser,
     getLikesByPost
   },

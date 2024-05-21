@@ -34,6 +34,7 @@ type UserPostLikes {
 
 type Query {
   getPosts: [Post!]!
+  getPostById(postId: String!): Post!
   getPostsByUser(userId: String!): [Post!]!
   getLikesByPost(postId: String!): [UserPostLikes!]
 }
