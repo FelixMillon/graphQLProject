@@ -7,6 +7,7 @@ import { CREATE_LIKE_POST } from '../../graphql/mutations';
 import { Link } from 'react-router-dom';
 import { Comment, Post } from '../../types/types'
 import {getCookie} from '../../storage/cookies'
+import './ArticleListPage.css';
 
 const ArticleListPage = () => {
   const { loading, error, data, refetch } = useQuery(GET_POSTS_QUERY);
@@ -43,55 +44,57 @@ const ArticleListPage = () => {
       await deleteLikePost({ variables: { postId, token } });
       await refetch();
     } catch (error) {
-      console.error('Error liking post:', error);
+      console.error('Error disliking post:', error);
     }
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (loading) return <p className="loading">Loading...</p>;
+  if (error) return <p className="error">Error: {error.message}</p>;
 
   return (
-<div>
-    <h1>Articles</h1>
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <textarea
-        placeholder="Body"
-        value={body}
-        onChange={(e) => setBody(e.target.value)}
-      />
-      <button type="submit">Create Post</button>
-    </form>
-    {data.getPosts.length > 0 ? (
-      data.getPosts.map((post: Post) => (
-        <div key={post.id}>
-          <h2>{post.title}</h2>
-          <p>{post.body}</p>
-          {post.usersLikes.some(like => like.userId === userId) ? (
-              <button onClick={() => handleDislike(post.id)}>Dislike Post</button>
-            ) : (
-              <button onClick={() => handleLike(post.id)}>Like Post</button>
-            )}
-          <h3>Comments:</h3>
-          {post.comments.map((comment: Comment) => (
-            <div key={comment.id}>
-              <p>{comment.comment}</p>
-            </div>
-          ))}
-          <h3>Likes:</h3>
-          <p>{post.usersLikes.length} likes</p>
-          <Link to={`/article/${post.id}`}>Read more</Link>
-        </div>
-      ))
-    ) : (
-      <p>No articles found.</p>
-    )}
-  </div>
+    <div className="container">
+      <h1>Articles</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="input-field"
+        />
+        <textarea
+          placeholder="Body"
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+          className="input-field"
+        />
+        <button type="submit" className="submit-btn">Create Post</button>
+      </form>
+      {data.getPosts.length > 0 ? (
+        data.getPosts.map((post: Post) => (
+          <div className="post" key={post.id}>
+            <h2>{post.title}</h2>
+            <p>{post.body}</p>
+            {post.usersLikes.some(like => like.userId === userId) ? (
+                <button onClick={() => handleDislike(post.id)} className="like-btn">Dislike Post</button> 
+              ) : (
+                <button onClick={() => handleLike(post.id)} className="like-btn">Like Post</button> 
+              )}
+            <h3>Comments:</h3>
+            {post.comments.map((comment: Comment) => (
+              <div key={comment.id}>
+                <p>{comment.comment}</p>
+              </div>
+            ))}
+            <h3 className="likes">Likes:</h3>
+            <p>{post.usersLikes.length} likes</p>
+            <Link to={`/article/${post.id}`} className="link">Read more</Link>
+          </div>
+        ))
+      ) : (
+        <p className="no-articles">No articles found.</p>
+      )}
+    </div>
   );
 };
 
