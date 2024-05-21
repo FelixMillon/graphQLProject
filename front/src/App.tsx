@@ -23,7 +23,7 @@ const App = () => {
               <ArticleListPage />
             </PrivateRoute>
           } />
-          <Route path="/article/:id" element={
+          <Route path="/article/:postId" element={
             <PrivateRoute>
               <ArticleDetailPage />
             </PrivateRoute>

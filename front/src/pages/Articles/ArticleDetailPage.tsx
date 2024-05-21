@@ -5,8 +5,8 @@ import { GET_POST_QUERY, GET_POSTS_QUERY } from '../../graphql/queries';
 import { UPDATE_POST_MUTATION, DELETE_POST_MUTATION } from '../../graphql/mutations';
 
 const ArticleDetailPage = () => {
-  const { id } = useParams<{ id: string }>();
-  const { loading, error, data } = useQuery(GET_POST_QUERY, { variables: { id } });
+  const { postId } = useParams<{ postId: string }>();
+  const { loading, error, data, refetch  } = useQuery(GET_POST_QUERY, { variables: { postId } });
   const [updatePost] = useMutation(UPDATE_POST_MUTATION);
   const [deletePost] = useMutation(DELETE_POST_MUTATION);
   const navigate = useNavigate();
@@ -15,11 +15,11 @@ const ArticleDetailPage = () => {
 
   const handleUpdate = (e: React.FormEvent) => {
     e.preventDefault();
-    updatePost({ variables: { id, title, body }, refetchQueries: [{ query: GET_POST_QUERY, variables: { id } }] });
+    updatePost({ variables: { postId, title, body }, refetchQueries: [{ query: GET_POST_QUERY, variables: { postId } }] });
   };
 
   const handleDelete = () => {
-    deletePost({ variables: { id }, refetchQueries: [{ query: GET_POSTS_QUERY }] });
+    deletePost({ variables: { postId }, refetchQueries: [{ query: GET_POSTS_QUERY }] });
     navigate('/articles');
   };
 
@@ -28,8 +28,8 @@ const ArticleDetailPage = () => {
 
   return (
     <div>
-      <h1>{data.getPost.title}</h1>
-      <p>{data.getPost.body}</p>
+      <h1>{data.getPostById.title}</h1>
+      <p>{data.getPostById.body}</p>
       <form onSubmit={handleUpdate}>
         <input
           type="text"

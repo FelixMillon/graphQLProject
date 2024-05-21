@@ -21,8 +21,8 @@ export const GET_POSTS_QUERY = gql`
 `;
 
 export const GET_POST_QUERY = gql`
-  query GetPost($id: ID!) {
-    getPosts {
+query getPostById($postId: String!) {
+  getPostById(postId: $postId) {
       id
       title
       body
@@ -39,4 +39,3 @@ export const GET_POST_QUERY = gql`
     }
   }
 `;
-
