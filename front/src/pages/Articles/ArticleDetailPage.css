@@ -4,6 +4,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  color: black;
 }
 
 h1 {
@@ -28,6 +29,7 @@ button {
   color: white;
   border: none;
   cursor: pointer;
+  margin-right: 5px;
 }
 
 button:hover {
