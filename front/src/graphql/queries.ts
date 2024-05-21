@@ -6,6 +6,10 @@ export const GET_POSTS_QUERY = gql`
       id
       title
       body
+      comments {
+        id
+        comment
+      }
     }
   }
 `;
@@ -19,6 +23,7 @@ export const GET_POST_QUERY = gql`
       comments {
         id
         comment
+        authorId
       }
     }
   }
