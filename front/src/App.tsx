@@ -5,6 +5,7 @@ import LoginPage from './pages/Login/LoginPage';
 import SignupPage from './pages/Signup/SignupPage';
 import ArticleListPage from './pages/Articles/ArticleListPage';
 import ArticleDetailPage from './pages/Articles/ArticleDetailPage';
+import ArticleCommentPage from './pages/Articles/ArticleCommentPage';
 import NavBar from './components/NavBar';
 import PrivateRoute from './components/PrivateRoute';
 import { AuthProvider } from './components/AuthContext';
@@ -26,6 +27,11 @@ const App = () => {
           <Route path="/article/:postId" element={
             <PrivateRoute>
               <ArticleDetailPage />
+            </PrivateRoute>
+          } />
+          <Route path="/comments/:postId" element={
+            <PrivateRoute>
+              <ArticleCommentPage />
             </PrivateRoute>
           } />
         </Routes>

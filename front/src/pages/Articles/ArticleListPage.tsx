@@ -86,6 +86,8 @@ const ArticleListPage = () => {
           <h3>Likes:</h3>
           <p>{post.usersLikes.length} likes</p>
           <Link to={`/article/${post.id}`}>Read more</Link>
+          <br/>
+          <Link to={`/comments/${post.id}`}>Comments</Link>
         </div>
       ))
     ) : (
