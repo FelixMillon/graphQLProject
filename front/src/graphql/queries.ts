@@ -21,8 +21,8 @@ export const GET_POSTS_QUERY = gql`
 `;
 
 export const GET_POST_QUERY = gql`
-  query GetPost($id: ID!) {
-    getPost(id: $id) {
+query getPostById($postId: String!) {
+  getPostById(postId: $postId) {
       id
       title
       body

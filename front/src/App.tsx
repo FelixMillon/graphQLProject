@@ -17,24 +17,21 @@ const App = () => {
     <AuthProvider>
       <Router>
         <NavBar />
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="/articles" element={
-              <PrivateRoute>
-                <ArticleListPage />
-              </PrivateRoute>
-            } />
-            <Route path="/article/:id" element={
-              <PrivateRoute>
-                <ArticleDetailPage />
-              </PrivateRoute>
-            } />
-          </Routes>
-        </main>
-        <Footer />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/articles" element={
+            <PrivateRoute>
+              <ArticleListPage />
+            </PrivateRoute>
+          } />
+          <Route path="/article/:postId" element={
+            <PrivateRoute>
+              <ArticleDetailPage />
+            </PrivateRoute>
+          } />
+        </Routes>
       </Router>
     </AuthProvider>
   );
