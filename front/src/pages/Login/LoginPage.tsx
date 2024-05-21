@@ -16,7 +16,13 @@ const LoginPage = () => {
       login(data.signIn.token); // Stocker le token JWT après connexion
       setCookie("gqltoken",data.signIn.token, 7)
       setCookie("gqlid",data.signIn.id, 7)
-      navigate('/articles');
+      console.log(data)
+      if(data.signIn.code == 200){
+        navigate('/articles');
+      }else{
+        alert('Mauvais identifiants')
+      }
+      
     },
     onError: (error) => {
       console.error("Login failed:", error.message);
