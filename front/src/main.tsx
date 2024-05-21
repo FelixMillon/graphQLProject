@@ -1,31 +1,21 @@
 import React from 'react';
-import * as ReactDOM from 'react-dom/client';
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import { createRoot } from 'react-dom/client';
+import { ApolloProvider } from '@apollo/client';
+import { Provider } from 'react-redux';
+import client from './apollo/client';
+import store from './redux/store';
 import App from './App';
+import './index.css';
 
-const client = new ApolloClient({
-  uri: 'https://flyby-router-demo.herokuapp.com/',
-  cache: new InMemoryCache(),
-});
-
-client.query({
-    query: gql`
-      query GetLocations {
-        locations {
-          id
-          name
-          description
-          photo
-        }
-      }
-    `,
-  }).then((result) => console.log(result));
-
-// Supported in React 18+
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const container = document.getElementById('root');
+const root = createRoot(container!);
 
 root.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>,
+  <React.StrictMode>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ApolloProvider>
+  </React.StrictMode>
 );
