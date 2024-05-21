@@ -16,7 +16,7 @@ const LoginPage = () => {
       login(data.signIn.token); // Stocker le token JWT après connexion
       setCookie("gqltoken",data.signIn.token, 7)
       setCookie("gqlid",data.signIn.id, 7)
-      console.log(data)
+      console.log(data.signIn.id)
       if(data.signIn.code == 200){
         navigate('/articles');
       }else{

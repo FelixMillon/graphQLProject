@@ -57,6 +57,7 @@ type SignInResponse {
   success: Boolean!
   message: String!
   token: String
+  id: String
 }
 
 type CreateUserResponse {

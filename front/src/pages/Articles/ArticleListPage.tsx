@@ -51,32 +51,28 @@ const ArticleListPage = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="article-list">
-      <h1>Articles</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <textarea
-            placeholder="Body"
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-          />
-        </div>
-        <button type="submit">Create Post</button>
-      </form>
-      {data.getPosts.length > 0 ? (
-        data.getPosts.map((post: Post) => (
-          <div className="article-box" key={post.id}>
-            <h2 className="article-title">{post.title}</h2>
-            <p className="article-body">{post.body}</p>
-            {post.usersLikes.some(like => like.userId !== userId) ? (
+<div>
+    <h1>Articles</h1>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <textarea
+        placeholder="Body"
+        value={body}
+        onChange={(e) => setBody(e.target.value)}
+      />
+      <button type="submit">Create Post</button>
+    </form>
+    {data.getPosts.length > 0 ? (
+      data.getPosts.map((post: Post) => (
+        <div key={post.id}>
+          <h2>{post.title}</h2>
+          <p>{post.body}</p>
+          {post.usersLikes.some(like => like.userId === userId) ? (
               <button onClick={() => handleDislike(post.id)}>Dislike Post</button>
             ) : (
               <button onClick={() => handleLike(post.id)}>Like Post</button>
